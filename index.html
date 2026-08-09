@@ -3,305 +3,173 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OldPC Simulator</title>
-    <link rel="stylesheet" href="style.css">
+
+    <title>Loading...</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            margin: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: #000;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        #video {
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        #start {
+            position: fixed;
+            inset: 0;
+            z-index: 10;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: #000;
+        }
+
+        #start button {
+            padding: 18px 35px;
+
+            border: none;
+            border-radius: 10px;
+
+            background: white;
+            color: black;
+
+            font-size: 18px;
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: transform 0.2s;
+        }
+
+        #start button:hover {
+            transform: scale(1.05);
+        }
+
+        #loading {
+            position: fixed;
+            inset: 0;
+
+            display: none;
+            align-items: center;
+            justify-content: center;
+
+            background: #000;
+            color: white;
+
+            z-index: 20;
+
+            font-size: 18px;
+        }
+
+        .loader {
+            text-align: center;
+        }
+
+        .bar {
+            width: 220px;
+            height: 5px;
+
+            background: #222;
+
+            margin-top: 15px;
+
+            overflow: hidden;
+        }
+
+        .progress {
+            width: 0%;
+            height: 100%;
+            background: white;
+
+            animation: load 1.5s forwards;
+        }
+
+        @keyframes load {
+            to {
+                width: 100%;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-<!-- BOOT SCREEN -->
-<div id="boot">
-    <div class="boot-logo">Microsoft Windows 98</div>
-    <p>Starting Windows...</p>
-</div>
-
-<!-- DESKTOP -->
-<div id="desktop">
-
-    <!-- GAME HUD -->
-    <div id="game-hud">
-        <div>💰 <span id="money">$50</span></div>
-        <div>📅 <span id="year">1998</span></div>
-        <div>🧠 RAM <span id="ram">32 MB</span></div>
-        <div>💾 <span id="storage">2 GB</span></div>
-        <div>❤️ PC <span id="pcHealth">100%</span></div>
-    </div>
-
-    <!-- DESKTOP ICONS -->
-
-    <div class="desktop-icon" ondblclick="openWindow('computer')">
-        <div>💻</div>
-        <span>My Computer</span>
-    </div>
-
-    <div class="desktop-icon" ondblclick="openWindow('documents')">
-        <div>📁</div>
-        <span>My Documents</span>
-    </div>
-
-    <div class="desktop-icon" ondblclick="openWindow('browser')">
-        <div>🌐</div>
-        <span>Internet Explorer</span>
-    </div>
-
-    <div class="desktop-icon" ondblclick="openWindow('notepad')">
-        <div>📝</div>
-        <span>Notepad</span>
-    </div>
-
-    <div class="desktop-icon" ondblclick="openWindow('email')">
-        <div>📧</div>
-        <span>Outlook Express</span>
-    </div>
-
-    <div class="desktop-icon" ondblclick="openWindow('minesweeper')">
-        <div>💣</div>
-        <span>Minesweeper</span>
-    </div>
-
-    <div class="desktop-icon" ondblclick="work()">
-        <div>💼</div>
-        <span>Work</span>
-    </div>
-
-    <div class="desktop-icon" ondblclick="upgradeMenu()">
-        <div>🔧</div>
-        <span>PC Upgrades</span>
-    </div>
-
-    <div class="desktop-icon" ondblclick="saveGame()">
-        <div>💾</div>
-        <span>Save Game</span>
-    </div>
-
-    <div class="desktop-icon" ondblclick="loadGame()">
-        <div>📂</div>
-        <span>Load Game</span>
-    </div>
-
-
-    <!-- MY COMPUTER -->
-
-    <div class="window" id="computer">
-
-        <div class="titlebar">
-            <span>💻 My Computer</span>
-            <button onclick="closeWindow('computer')">✕</button>
-        </div>
-
-        <div class="window-content">
-
-            <div class="file-icon">
-                <div>💾</div>
-                <span>Local Disk (C:)</span>
-            </div>
-
-            <div class="file-icon">
-                <div>💿</div>
-                <span>CD Drive</span>
-            </div>
-
-            <div class="file-icon">
-                <div>🖨️</div>
-                <span>Printers</span>
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- MY DOCUMENTS -->
-
-    <div class="window" id="documents">
-
-        <div class="titlebar">
-            <span>📁 My Documents</span>
-            <button onclick="closeWindow('documents')">✕</button>
-        </div>
-
-        <div class="window-content">
-
-            <div class="file">📄 homework.txt</div>
-            <div class="file">🎵 cool_song.mp3</div>
-            <div class="file">🖼️ vacation.bmp</div>
-            <div class="file">📄 secret.txt</div>
-
-        </div>
-
-    </div>
-
-
-    <!-- NOTEPAD -->
-
-    <div class="window" id="notepad">
-
-        <div class="titlebar">
-            <span>📝 Notepad</span>
-            <button onclick="closeWindow('notepad')">✕</button>
-        </div>
-
-        <div class="notepad-menu">
-            File&nbsp;&nbsp; Edit&nbsp;&nbsp; Format&nbsp;&nbsp; Help
-        </div>
-
-        <textarea
-            id="notepadText"
-            placeholder="Type something..."
-        ></textarea>
-
-        <div class="notepad-footer">
-            <button onclick="saveNote()">Save</button>
-            <button onclick="clearNote()">Clear</button>
-        </div>
-
-    </div>
-
-
-    <!-- INTERNET EXPLORER -->
-
-    <div class="window" id="browser">
-
-        <div class="titlebar">
-            <span>🌐 Internet Explorer</span>
-            <button onclick="closeWindow('browser')">✕</button>
-        </div>
-
-        <div class="browser-bar">
-
-            <input
-                id="address"
-                value="http://www.homepage.com"
-            >
-
-            <button onclick="visitWebsite()">Go</button>
-
-        </div>
-
-        <div id="webpage" class="webpage">
-
-            <h1>Welcome to the Internet!</h1>
-
-            <p>
-                Welcome to the World Wide Web.
-            </p>
-
-            <hr>
-
-            <p>
-                Best viewed in Internet Explorer 4.0
-            </p>
-
-        </div>
-
-    </div>
-
-
-    <!-- EMAIL -->
-
-    <div class="window" id="email">
-
-        <div class="titlebar">
-            <span>📧 Outlook Express</span>
-            <button onclick="closeWindow('email')">✕</button>
-        </div>
-
-        <div class="email">
-
-            <h3>Inbox</h3>
-
-            <div class="email-message" onclick="readEmail()">
-                📧 You've got mail!
-                <small>Microsoft</small>
-            </div>
-
-            <div class="email-message" onclick="readEmail2()">
-                💰 YOU WON $10,000!!!
-                <small>TotallyRealMoney@email.com</small>
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- MINESWEEPER -->
-
-    <div class="window" id="minesweeper">
-
-        <div class="titlebar">
-            <span>💣 Minesweeper</span>
-            <button onclick="closeWindow('minesweeper')">✕</button>
-        </div>
-
-        <div id="mineboard"></div>
-
-    </div>
-
-
-    <!-- START MENU -->
-
-    <div id="start-menu">
-
-        <div class="start-header">
-            Windows 98
-        </div>
-
-        <div onclick="openWindow('computer')">
-            💻 My Computer
-        </div>
-
-        <div onclick="openWindow('documents')">
-            📁 My Documents
-        </div>
-
-        <div onclick="openWindow('browser')">
-            🌐 Internet Explorer
-        </div>
-
-        <div onclick="openWindow('notepad')">
-            📝 Notepad
-        </div>
-
-        <div onclick="openWindow('email')">
-            📧 Outlook Express
-        </div>
-
-        <div onclick="openWindow('minesweeper')">
-            💣 Minesweeper
-        </div>
-
-        <hr>
-
-        <div onclick="shutdown()">
-            🔌 Shut Down
-        </div>
-
-    </div>
-
-
-    <!-- MESSAGE -->
-
-    <div id="game-message"></div>
-
-
-    <!-- TASKBAR -->
-
-    <div id="taskbar">
-
-        <button id="start-button" onclick="toggleStart()">
-            🪟 Start
+    <!-- Rickroll video -->
+    <iframe
+        id="video"
+        src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=0&controls=1&rel=0&modestbranding=1"
+        allow="autoplay; encrypted-media; fullscreen"
+        allowfullscreen>
+    </iframe>
+
+    <!-- Autoplay fallback -->
+    <div id="start">
+
+        <button onclick="startRickroll()">
+            Continue
         </button>
 
-        <div id="taskbar-apps"></div>
+    </div>
 
-        <div id="clock"></div>
+    <!-- Fake loading screen -->
+    <div id="loading">
+
+        <div class="loader">
+
+            <div>
+                Loading...
+            </div>
+
+            <div class="bar">
+                <div class="progress"></div>
+            </div>
+
+        </div>
 
     </div>
 
-</div>
+    <script>
 
-<script src="script.js"></script>
+        function startRickroll() {
+
+            document.getElementById("start").style.display = "none";
+
+            document.getElementById("loading").style.display = "flex";
+
+            setTimeout(() => {
+
+                document.getElementById("loading").style.display = "none";
+
+                const video = document.getElementById("video");
+
+                video.src =
+                    "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&controls=1&rel=0&modestbranding=1";
+
+            }, 1500);
+
+        }
+
+    </script>
 
 </body>
 </html>
