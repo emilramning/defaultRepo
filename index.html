@@ -1,115 +1,188 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Company Simulator</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Company Simulator</title>
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <header>
-        <div class="logo">COMPANY<span>SIM</span></div>
-        <div class="month">MONTH <span id="month">1</span></div>
-    </header>
+<header>
+    <div class="logo">COMPANY<span>SIM</span></div>
 
-    <main>
+    <div class="top-right">
+        <span>MONTH <b id="month">1</b></span>
+        <button onclick="saveGame()">💾 Save</button>
+        <button onclick="loadGame()">↩ Load</button>
+    </div>
+</header>
 
-        <section class="hero">
-            <p class="eyebrow">BUILD YOUR EMPIRE</p>
-            <h1>Turn an idea into a <span>billion-dollar company.</span></h1>
-            <p class="subtitle">
-                Make smart decisions, manage your money and grow your company.
-            </p>
-        </section>
+<main>
 
-        <section class="company-card">
-            <div>
-                <p class="label">YOUR COMPANY</p>
-                <h2 id="companyName">My Company</h2>
-                <p id="industry">Technology</p>
-            </div>
+<section class="hero">
+    <p class="eyebrow">BUILD YOUR EMPIRE</p>
+    <h1>Build a company.<br><span>Change the world.</span></h1>
+    <p class="subtitle">Start with nothing. End with billions.</p>
+</section>
 
-            <button onclick="changeCompany()">⚙️ Settings</button>
-        </section>
+<section class="company-card">
+    <div>
+        <p class="label">YOUR COMPANY</p>
+        <h2 id="companyName">My Company</h2>
+        <p id="industry">Technology</p>
+    </div>
 
-        <section class="stats">
+    <button onclick="changeCompany()">⚙️ Company</button>
+</section>
 
-            <div class="stat">
-                <p>💰 CASH</p>
-                <h2 id="cash">$10,000</h2>
-            </div>
+<section class="stats">
 
-            <div class="stat">
-                <p>📈 REVENUE</p>
-                <h2 id="revenue">$0</h2>
-            </div>
+<div class="stat">
+<p>💰 CASH</p>
+<h2 id="cash">$10,000</h2>
+</div>
 
-            <div class="stat">
-                <p>💸 EXPENSES</p>
-                <h2 id="expenses">$0</h2>
-            </div>
+<div class="stat">
+<p>📈 MONTHLY REVENUE</p>
+<h2 id="revenue">$0</h2>
+</div>
 
-            <div class="stat">
-                <p>🏢 VALUATION</p>
-                <h2 id="valuation">$10,000</h2>
-            </div>
+<div class="stat">
+<p>💸 MONTHLY EXPENSES</p>
+<h2 id="expenses">$0</h2>
+</div>
 
-            <div class="stat">
-                <p>👥 EMPLOYEES</p>
-                <h2 id="employees">0</h2>
-            </div>
+<div class="stat">
+<p>🏢 VALUATION</p>
+<h2 id="valuation">$10,000</h2>
+</div>
 
-            <div class="stat">
-                <p>⭐ REPUTATION</p>
-                <h2 id="reputation">10</h2>
-            </div>
+<div class="stat">
+<p>👥 EMPLOYEES</p>
+<h2 id="employees">0</h2>
+</div>
 
-        </section>
+<div class="stat">
+<p>⭐ REPUTATION</p>
+<h2 id="reputation">10</h2>
+</div>
 
-        <section class="actions">
+</section>
 
-            <h2>Actions</h2>
+<section class="panel">
 
-            <div class="action-grid">
+<h2>📊 Company Performance</h2>
 
-                <button class="action" onclick="hireEmployee()">
-                    <span>👨‍💻</span>
-                    <strong>Hire Employee</strong>
-                    <small>$3,000 / month</small>
-                </button>
+<div class="bars">
+    <div>
+        <span>Revenue</span>
+        <div class="bar"><i id="revenueBar"></i></div>
+    </div>
 
-                <button class="action" onclick="marketing()">
-                    <span>📢</span>
-                    <strong>Marketing</strong>
-                    <small>$1,000</small>
-                </button>
+    <div>
+        <span>Reputation</span>
+        <div class="bar"><i id="repBar"></i></div>
+    </div>
 
-                <button class="action" onclick="developProduct()">
-                    <span>🛠️</span>
-                    <strong>Develop Product</strong>
-                    <small>$5,000</small>
-                </button>
+    <div>
+        <span>Market Share</span>
+        <div class="bar"><i id="marketBar"></i></div>
+    </div>
+</div>
 
-            </div>
+</section>
 
-        </section>
+<section class="actions">
 
-        <button class="end-month" onclick="endMonth()">
-            END MONTH →
-        </button>
+<h2>Actions</h2>
 
-        <section class="log">
-            <h2>Company News</h2>
-            <div id="news">
-                <p>🚀 Your company has been founded.</p>
-            </div>
-        </section>
+<div class="action-grid">
 
-    </main>
+<button class="action" onclick="hire('worker')">
+<span>👷</span>
+<strong>Hire Worker</strong>
+<small>$2,000/month</small>
+</button>
 
-    <script src="script.js"></script>
+<button class="action" onclick="hire('developer')">
+<span>👨‍💻</span>
+<strong>Hire Developer</strong>
+<small>$4,000/month</small>
+</button>
+
+<button class="action" onclick="hire('manager')">
+<span>👔</span>
+<strong>Hire Manager</strong>
+<small>$6,000/month</small>
+</button>
+
+<button class="action" onclick="marketing()">
+<span>📢</span>
+<strong>Marketing</strong>
+<small>$2,000</small>
+</button>
+
+<button class="action" onclick="developProduct()">
+<span>🛠️</span>
+<strong>Develop Product</strong>
+<small>$7,500</small>
+</button>
+
+<button class="action" onclick="takeLoan()">
+<span>🏦</span>
+<strong>Take Loan</strong>
+<small>$25,000</small>
+</button>
+
+</div>
+
+</section>
+
+<section class="panel">
+
+<h2>📦 Products</h2>
+
+<div id="products">
+<p class="empty">No products yet. Build your first one.</p>
+</div>
+
+</section>
+
+<section class="panel">
+
+<h2>⚔️ Competitors</h2>
+
+<div id="competitors"></div>
+
+</section>
+
+<button class="end-month" onclick="endMonth()">
+END MONTH →
+</button>
+
+<section class="panel">
+
+<h2>📰 Company News</h2>
+
+<div id="news">
+<p>🚀 Your company has been founded.</p>
+</div>
+
+</section>
+
+<section class="panel">
+
+<h2>🏆 Achievements</h2>
+
+<div id="achievements"></div>
+
+</section>
+
+</main>
+
+<script src="script.js"></script>
 
 </body>
 </html>
