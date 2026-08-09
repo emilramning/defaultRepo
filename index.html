@@ -1,186 +1,222 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Company Simulator</title>
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OldPC Simulator</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<header>
-    <div class="logo">COMPANY<span>SIM</span></div>
+<div id="desktop">
 
-    <div class="top-right">
-        <span>MONTH <b id="month">1</b></span>
-        <button onclick="saveGame()">💾 Save</button>
-        <button onclick="loadGame()">↩ Load</button>
-    </div>
-</header>
-
-<main>
-
-<section class="hero">
-    <p class="eyebrow">BUILD YOUR EMPIRE</p>
-    <h1>Build a company.<br><span>Change the world.</span></h1>
-    <p class="subtitle">Start with nothing. End with billions.</p>
-</section>
-
-<section class="company-card">
-    <div>
-        <p class="label">YOUR COMPANY</p>
-        <h2 id="companyName">My Company</h2>
-        <p id="industry">Technology</p>
+    <div class="desktop-icon" ondblclick="openWindow('computer')">
+        <div class="icon">💻</div>
+        <span>My Computer</span>
     </div>
 
-    <button onclick="changeCompany()">⚙️ Company</button>
-</section>
-
-<section class="stats">
-
-<div class="stat">
-<p>💰 CASH</p>
-<h2 id="cash">$10,000</h2>
-</div>
-
-<div class="stat">
-<p>📈 MONTHLY REVENUE</p>
-<h2 id="revenue">$0</h2>
-</div>
-
-<div class="stat">
-<p>💸 MONTHLY EXPENSES</p>
-<h2 id="expenses">$0</h2>
-</div>
-
-<div class="stat">
-<p>🏢 VALUATION</p>
-<h2 id="valuation">$10,000</h2>
-</div>
-
-<div class="stat">
-<p>👥 EMPLOYEES</p>
-<h2 id="employees">0</h2>
-</div>
-
-<div class="stat">
-<p>⭐ REPUTATION</p>
-<h2 id="reputation">10</h2>
-</div>
-
-</section>
-
-<section class="panel">
-
-<h2>📊 Company Performance</h2>
-
-<div class="bars">
-    <div>
-        <span>Revenue</span>
-        <div class="bar"><i id="revenueBar"></i></div>
+    <div class="desktop-icon" ondblclick="openWindow('documents')">
+        <div class="icon">📁</div>
+        <span>My Documents</span>
     </div>
 
-    <div>
-        <span>Reputation</span>
-        <div class="bar"><i id="repBar"></i></div>
+    <div class="desktop-icon" ondblclick="openWindow('browser')">
+        <div class="icon">🌐</div>
+        <span>Internet</span>
     </div>
 
-    <div>
-        <span>Market Share</span>
-        <div class="bar"><i id="marketBar"></i></div>
+    <div class="desktop-icon" ondblclick="openWindow('notepad')">
+        <div class="icon">📝</div>
+        <span>Notepad</span>
     </div>
+
+    <div class="desktop-icon" ondblclick="openWindow('minesweeper')">
+        <div class="icon">💣</div>
+        <span>Minesweeper</span>
+    </div>
+
+    <!-- COMPUTER WINDOW -->
+
+    <div class="window" id="computer" style="left:180px;top:100px;width:500px;">
+
+        <div class="titlebar">
+            <span>💻 My Computer</span>
+
+            <button onclick="closeWindow('computer')">✕</button>
+        </div>
+
+        <div class="window-content">
+
+            <div class="folder">
+                💾 Local Disk (C:)
+            </div>
+
+            <div class="folder">
+                💿 CD Drive
+            </div>
+
+            <div class="folder">
+                🖨️ Printers
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- DOCUMENTS -->
+
+    <div class="window" id="documents" style="left:250px;top:150px;width:450px;">
+
+        <div class="titlebar">
+
+            <span>📁 My Documents</span>
+
+            <button onclick="closeWindow('documents')">✕</button>
+
+        </div>
+
+        <div class="window-content">
+
+            <p>📄 homework.txt</p>
+            <p>🎵 cool_song.mp3</p>
+            <p>🖼️ vacation.bmp</p>
+
+        </div>
+
+    </div>
+
+    <!-- NOTEPAD -->
+
+    <div class="window" id="notepad" style="left:300px;top:120px;width:500px;">
+
+        <div class="titlebar">
+
+            <span>📝 Notepad</span>
+
+            <button onclick="closeWindow('notepad')">✕</button>
+
+        </div>
+
+        <textarea class="notepad" placeholder="Type something..."></textarea>
+
+    </div>
+
+    <!-- BROWSER -->
+
+    <div class="window" id="browser" style="left:150px;top:80px;width:650px;">
+
+        <div class="titlebar">
+
+            <span>🌐 Internet Explorer</span>
+
+            <button onclick="closeWindow('browser')">✕</button>
+
+        </div>
+
+        <div class="browser">
+
+            <div class="address">
+                <input id="address" value="http://www.example.com">
+
+                <button onclick="visitWebsite()">Go</button>
+            </div>
+
+            <div class="webpage" id="webpage">
+
+                <h1>Welcome to the Internet!</h1>
+
+                <p>You are now connected to the World Wide Web.</p>
+
+                <hr>
+
+                <p>🌐 Best viewed in Internet Explorer 4.0</p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- MINESWEEPER -->
+
+    <div class="window" id="minesweeper" style="left:400px;top:100px;width:300px;">
+
+        <div class="titlebar">
+
+            <span>💣 Minesweeper</span>
+
+            <button onclick="closeWindow('minesweeper')">✕</button>
+
+        </div>
+
+        <div class="minegame">
+
+            <button onclick="mineClick(this)">?</button>
+            <button onclick="mineClick(this)">?</button>
+            <button onclick="mineClick(this)">?</button>
+
+            <button onclick="mineClick(this)">?</button>
+            <button onclick="mineClick(this)">?</button>
+            <button onclick="mineClick(this)">?</button>
+
+            <button onclick="mineClick(this)">?</button>
+            <button onclick="mineClick(this)">?</button>
+            <button onclick="mineClick(this)">?</button>
+
+        </div>
+
+    </div>
+
+    <!-- START MENU -->
+
+    <div id="start-menu">
+
+        <div class="start-title">
+            Windows 98
+        </div>
+
+        <div class="menu-item" onclick="openWindow('computer')">
+            💻 My Computer
+        </div>
+
+        <div class="menu-item" onclick="openWindow('documents')">
+            📁 My Documents
+        </div>
+
+        <div class="menu-item" onclick="openWindow('notepad')">
+            📝 Notepad
+        </div>
+
+        <div class="menu-item" onclick="openWindow('browser')">
+            🌐 Internet Explorer
+        </div>
+
+        <div class="menu-item" onclick="openWindow('minesweeper')">
+            💣 Minesweeper
+        </div>
+
+        <hr>
+
+        <div class="menu-item" onclick="shutdown()">
+            🔌 Shut Down
+        </div>
+
+    </div>
+
+    <!-- TASKBAR -->
+
+    <div id="taskbar">
+
+        <button id="start-button" onclick="toggleStart()">
+            🪟 Start
+        </button>
+
+        <div id="clock"></div>
+
+    </div>
+
 </div>
-
-</section>
-
-<section class="actions">
-
-<h2>Actions</h2>
-
-<div class="action-grid">
-
-<button class="action" onclick="hire('worker')">
-<span>👷</span>
-<strong>Hire Worker</strong>
-<small>$2,000/month</small>
-</button>
-
-<button class="action" onclick="hire('developer')">
-<span>👨‍💻</span>
-<strong>Hire Developer</strong>
-<small>$4,000/month</small>
-</button>
-
-<button class="action" onclick="hire('manager')">
-<span>👔</span>
-<strong>Hire Manager</strong>
-<small>$6,000/month</small>
-</button>
-
-<button class="action" onclick="marketing()">
-<span>📢</span>
-<strong>Marketing</strong>
-<small>$2,000</small>
-</button>
-
-<button class="action" onclick="developProduct()">
-<span>🛠️</span>
-<strong>Develop Product</strong>
-<small>$7,500</small>
-</button>
-
-<button class="action" onclick="takeLoan()">
-<span>🏦</span>
-<strong>Take Loan</strong>
-<small>$25,000</small>
-</button>
-
-</div>
-
-</section>
-
-<section class="panel">
-
-<h2>📦 Products</h2>
-
-<div id="products">
-<p class="empty">No products yet. Build your first one.</p>
-</div>
-
-</section>
-
-<section class="panel">
-
-<h2>⚔️ Competitors</h2>
-
-<div id="competitors"></div>
-
-</section>
-
-<button class="end-month" onclick="endMonth()">
-END MONTH →
-</button>
-
-<section class="panel">
-
-<h2>📰 Company News</h2>
-
-<div id="news">
-<p>🚀 Your company has been founded.</p>
-</div>
-
-</section>
-
-<section class="panel">
-
-<h2>🏆 Achievements</h2>
-
-<div id="achievements"></div>
-
-</section>
-
-</main>
 
 <script src="script.js"></script>
 
