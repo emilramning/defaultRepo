@@ -1,86 +1,112 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OldPC Simulator</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Windows 98 Simulator</title>
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
+<div id="boot">
+    <div class="boot-logo">Microsoft Windows 98</div>
+    <p>Starting Windows...</p>
+</div>
+
 <div id="desktop">
 
     <div class="desktop-icon" ondblclick="openWindow('computer')">
-        <div class="icon">💻</div>
+        <div>💻</div>
         <span>My Computer</span>
     </div>
 
     <div class="desktop-icon" ondblclick="openWindow('documents')">
-        <div class="icon">📁</div>
+        <div>📁</div>
         <span>My Documents</span>
     </div>
 
     <div class="desktop-icon" ondblclick="openWindow('browser')">
-        <div class="icon">🌐</div>
-        <span>Internet</span>
+        <div>🌐</div>
+        <span>Internet Explorer</span>
     </div>
 
     <div class="desktop-icon" ondblclick="openWindow('notepad')">
-        <div class="icon">📝</div>
+        <div>📝</div>
         <span>Notepad</span>
     </div>
 
+    <div class="desktop-icon" ondblclick="openWindow('email')">
+        <div>📧</div>
+        <span>Outlook Express</span>
+    </div>
+
     <div class="desktop-icon" ondblclick="openWindow('minesweeper')">
-        <div class="icon">💣</div>
+        <div>💣</div>
         <span>Minesweeper</span>
     </div>
 
-    <!-- COMPUTER WINDOW -->
+    <div class="desktop-icon" ondblclick="openWindow('floppy')">
+        <div>💾</div>
+        <span>Floppy Disk</span>
+    </div>
 
-    <div class="window" id="computer" style="left:180px;top:100px;width:500px;">
+    <!-- MY COMPUTER -->
+
+    <div class="window" id="computer">
 
         <div class="titlebar">
-            <span>💻 My Computer</span>
-
+            💻 My Computer
             <button onclick="closeWindow('computer')">✕</button>
         </div>
 
         <div class="window-content">
 
-            <div class="folder">
-                💾 Local Disk (C:)
+            <div class="file-icon" ondblclick="openWindow('disk')">
+                💾
+                <span>Local Disk (C:)</span>
             </div>
 
-            <div class="folder">
-                💿 CD Drive
+            <div class="file-icon">
+                💿
+                <span>CD Drive</span>
             </div>
 
-            <div class="folder">
-                🖨️ Printers
+            <div class="file-icon">
+                🖨️
+                <span>Printers</span>
             </div>
 
         </div>
 
     </div>
 
-    <!-- DOCUMENTS -->
+    <!-- FILES -->
 
-    <div class="window" id="documents" style="left:250px;top:150px;width:450px;">
+    <div class="window" id="documents">
 
         <div class="titlebar">
-
-            <span>📁 My Documents</span>
-
+            📁 My Documents
             <button onclick="closeWindow('documents')">✕</button>
-
         </div>
 
         <div class="window-content">
 
-            <p>📄 homework.txt</p>
-            <p>🎵 cool_song.mp3</p>
-            <p>🖼️ vacation.bmp</p>
+            <div class="file">
+                📄 homework.txt
+            </div>
+
+            <div class="file">
+                🎵 cool_song.mp3
+            </div>
+
+            <div class="file">
+                🖼️ vacation.bmp
+            </div>
+
+            <div class="file">
+                📄 secret.txt
+            </div>
 
         </div>
 
@@ -88,51 +114,120 @@
 
     <!-- NOTEPAD -->
 
-    <div class="window" id="notepad" style="left:300px;top:120px;width:500px;">
+    <div class="window" id="notepad">
 
         <div class="titlebar">
-
-            <span>📝 Notepad</span>
-
+            📝 Notepad
             <button onclick="closeWindow('notepad')">✕</button>
-
         </div>
 
-        <textarea class="notepad" placeholder="Type something..."></textarea>
+        <div class="notepad-menu">
+            File Edit Format Help
+        </div>
+
+        <textarea
+            id="notepadText"
+            placeholder="Type something..."
+        ></textarea>
+
+        <div class="notepad-footer">
+            <button onclick="saveNote()">Save</button>
+            <button onclick="clearNote()">Clear</button>
+        </div>
 
     </div>
 
     <!-- BROWSER -->
 
-    <div class="window" id="browser" style="left:150px;top:80px;width:650px;">
+    <div class="window" id="browser">
 
         <div class="titlebar">
-
-            <span>🌐 Internet Explorer</span>
-
+            🌐 Internet Explorer
             <button onclick="closeWindow('browser')">✕</button>
+        </div>
+
+        <div class="browser-bar">
+
+            <input
+                id="address"
+                value="http://www.homepage.com"
+            >
+
+            <button onclick="visitWebsite()">Go</button>
 
         </div>
 
-        <div class="browser">
+        <div id="webpage" class="webpage">
 
-            <div class="address">
-                <input id="address" value="http://www.example.com">
+            <h1>Welcome!</h1>
 
-                <button onclick="visitWebsite()">Go</button>
+            <p>
+                Welcome to the Internet.
+            </p>
+
+            <hr>
+
+            <p>
+                You are browsing with Internet Explorer 4.0
+            </p>
+
+        </div>
+
+    </div>
+
+    <!-- EMAIL -->
+
+    <div class="window" id="email">
+
+        <div class="titlebar">
+            📧 Outlook Express
+            <button onclick="closeWindow('email')">✕</button>
+        </div>
+
+        <div class="email">
+
+            <h3>Inbox</h3>
+
+            <div class="email-message"
+                 onclick="readEmail()">
+
+                📧 You've got mail!
+                <small>Microsoft</small>
+
             </div>
 
-            <div class="webpage" id="webpage">
+            <div class="email-message"
+                 onclick="readEmail2()">
 
-                <h1>Welcome to the Internet!</h1>
-
-                <p>You are now connected to the World Wide Web.</p>
-
-                <hr>
-
-                <p>🌐 Best viewed in Internet Explorer 4.0</p>
+                💰 YOU WON $10,000!!!
+                <small>TotallyRealMoney@email.com</small>
 
             </div>
+
+        </div>
+
+    </div>
+
+    <!-- FLOPPY -->
+
+    <div class="window" id="floppy">
+
+        <div class="titlebar">
+            💾 Floppy Disk
+            <button onclick="closeWindow('floppy')">✕</button>
+        </div>
+
+        <div class="window-content">
+
+            <h3>3½ Floppy Disk</h3>
+
+            <p>Capacity: 1.44 MB</p>
+
+            <br>
+
+            <button onclick="openFloppy()">
+                Open Disk
+            </button>
 
         </div>
 
@@ -140,31 +235,14 @@
 
     <!-- MINESWEEPER -->
 
-    <div class="window" id="minesweeper" style="left:400px;top:100px;width:300px;">
+    <div class="window" id="minesweeper">
 
         <div class="titlebar">
-
-            <span>💣 Minesweeper</span>
-
+            💣 Minesweeper
             <button onclick="closeWindow('minesweeper')">✕</button>
-
         </div>
 
-        <div class="minegame">
-
-            <button onclick="mineClick(this)">?</button>
-            <button onclick="mineClick(this)">?</button>
-            <button onclick="mineClick(this)">?</button>
-
-            <button onclick="mineClick(this)">?</button>
-            <button onclick="mineClick(this)">?</button>
-            <button onclick="mineClick(this)">?</button>
-
-            <button onclick="mineClick(this)">?</button>
-            <button onclick="mineClick(this)">?</button>
-            <button onclick="mineClick(this)">?</button>
-
-        </div>
+        <div id="mineboard"></div>
 
     </div>
 
@@ -172,33 +250,37 @@
 
     <div id="start-menu">
 
-        <div class="start-title">
+        <div class="start-header">
             Windows 98
         </div>
 
-        <div class="menu-item" onclick="openWindow('computer')">
+        <div onclick="openWindow('computer')">
             💻 My Computer
         </div>
 
-        <div class="menu-item" onclick="openWindow('documents')">
+        <div onclick="openWindow('documents')">
             📁 My Documents
         </div>
 
-        <div class="menu-item" onclick="openWindow('notepad')">
-            📝 Notepad
-        </div>
-
-        <div class="menu-item" onclick="openWindow('browser')">
+        <div onclick="openWindow('browser')">
             🌐 Internet Explorer
         </div>
 
-        <div class="menu-item" onclick="openWindow('minesweeper')">
+        <div onclick="openWindow('notepad')">
+            📝 Notepad
+        </div>
+
+        <div onclick="openWindow('email')">
+            📧 Outlook Express
+        </div>
+
+        <div onclick="openWindow('minesweeper')">
             💣 Minesweeper
         </div>
 
         <hr>
 
-        <div class="menu-item" onclick="shutdown()">
+        <div onclick="shutdown()">
             🔌 Shut Down
         </div>
 
@@ -208,9 +290,11 @@
 
     <div id="taskbar">
 
-        <button id="start-button" onclick="toggleStart()">
+        <button onclick="toggleStart()">
             🪟 Start
         </button>
+
+        <div id="taskbar-apps"></div>
 
         <div id="clock"></div>
 
