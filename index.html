@@ -4,13 +4,112 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Company Simulator</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <h1>🏢 Company Simulator</h1>
+    <header>
+        <div class="logo">COMPANY<span>SIM</span></div>
+        <div class="month">MONTH <span id="month">1</span></div>
+    </header>
 
-    <p>Your company starts here.</p>
+    <main>
+
+        <section class="hero">
+            <p class="eyebrow">BUILD YOUR EMPIRE</p>
+            <h1>Turn an idea into a <span>billion-dollar company.</span></h1>
+            <p class="subtitle">
+                Make smart decisions, manage your money and grow your company.
+            </p>
+        </section>
+
+        <section class="company-card">
+            <div>
+                <p class="label">YOUR COMPANY</p>
+                <h2 id="companyName">My Company</h2>
+                <p id="industry">Technology</p>
+            </div>
+
+            <button onclick="changeCompany()">⚙️ Settings</button>
+        </section>
+
+        <section class="stats">
+
+            <div class="stat">
+                <p>💰 CASH</p>
+                <h2 id="cash">$10,000</h2>
+            </div>
+
+            <div class="stat">
+                <p>📈 REVENUE</p>
+                <h2 id="revenue">$0</h2>
+            </div>
+
+            <div class="stat">
+                <p>💸 EXPENSES</p>
+                <h2 id="expenses">$0</h2>
+            </div>
+
+            <div class="stat">
+                <p>🏢 VALUATION</p>
+                <h2 id="valuation">$10,000</h2>
+            </div>
+
+            <div class="stat">
+                <p>👥 EMPLOYEES</p>
+                <h2 id="employees">0</h2>
+            </div>
+
+            <div class="stat">
+                <p>⭐ REPUTATION</p>
+                <h2 id="reputation">10</h2>
+            </div>
+
+        </section>
+
+        <section class="actions">
+
+            <h2>Actions</h2>
+
+            <div class="action-grid">
+
+                <button class="action" onclick="hireEmployee()">
+                    <span>👨‍💻</span>
+                    <strong>Hire Employee</strong>
+                    <small>$3,000 / month</small>
+                </button>
+
+                <button class="action" onclick="marketing()">
+                    <span>📢</span>
+                    <strong>Marketing</strong>
+                    <small>$1,000</small>
+                </button>
+
+                <button class="action" onclick="developProduct()">
+                    <span>🛠️</span>
+                    <strong>Develop Product</strong>
+                    <small>$5,000</small>
+                </button>
+
+            </div>
+
+        </section>
+
+        <button class="end-month" onclick="endMonth()">
+            END MONTH →
+        </button>
+
+        <section class="log">
+            <h2>Company News</h2>
+            <div id="news">
+                <p>🚀 Your company has been founded.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
 
 </body>
 </html>
