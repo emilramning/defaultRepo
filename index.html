@@ -1,6 +1,921 @@
-<html>
-  <body>
-    Hej jag heter Emil!
-    <a href=https://emilramning.github.io/neontrade/>Test</a>
-  </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Emil Ramning — Projects</title>
+
+  <meta name="description" content="Emil Ramning — projects, experiments and things I'm building.">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: #08090b;
+      color: #f5f5f7;
+      font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI",
+        Roboto, Helvetica, Arial, sans-serif;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* subtle background glow */
+
+    body::before {
+      content: "";
+      position: fixed;
+      width: 700px;
+      height: 700px;
+      top: -300px;
+      right: -250px;
+      background: radial-gradient(
+        circle,
+        rgba(255,255,255,0.07),
+        transparent 70%
+      );
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    /* NAVBAR */
+
+    .nav {
+      width: min(1180px, calc(100% - 48px));
+      height: 85px;
+      margin: auto;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -1.5px;
+    }
+
+    .logo span {
+      opacity: 0.4;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+    }
+
+    .nav-links a {
+      color: #92959f;
+      font-size: 13px;
+      transition: 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: white;
+    }
+
+    .github-button {
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 10px 15px;
+      border-radius: 999px;
+      color: white !important;
+    }
+
+    /* HERO */
+
+    .hero {
+      width: min(1180px, calc(100% - 48px));
+      min-height: calc(100vh - 85px);
+      margin: auto;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      padding-bottom: 100px;
+    }
+
+    .eyebrow {
+      color: #858892;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+    }
+
+    .online-dot {
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      background: white;
+      border-radius: 50%;
+      margin-right: 8px;
+      box-shadow: 0 0 15px white;
+    }
+
+    .hero h1 {
+      font-size: clamp(60px, 9vw, 115px);
+      line-height: 0.92;
+      letter-spacing: -7px;
+
+      margin-top: 25px;
+      margin-bottom: 30px;
+    }
+
+    .hero h1 span {
+      color: #6f727b;
+    }
+
+    .hero-description {
+      max-width: 510px;
+
+      color: #92959f;
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .button {
+      padding: 14px 20px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 600;
+
+      transition:
+        transform 0.2s,
+        background 0.2s;
+    }
+
+    .button:hover {
+      transform: translateY(-3px);
+    }
+
+    .primary {
+      background: white;
+      color: black;
+    }
+
+    .secondary {
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .scroll {
+      margin-top: 80px;
+
+      color: #555861;
+      font-size: 10px;
+      letter-spacing: 2px;
+    }
+
+    /* SECTIONS */
+
+    section {
+      width: min(1180px, calc(100% - 48px));
+      margin: auto;
+    }
+
+    .projects {
+      padding: 120px 0;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+
+      margin-bottom: 35px;
+    }
+
+    .section-header h2 {
+      font-size: clamp(40px, 5vw, 65px);
+      letter-spacing: -4px;
+      margin-top: 12px;
+    }
+
+    .section-description {
+      color: #6e7179;
+      font-size: 13px;
+      line-height: 1.6;
+      text-align: right;
+    }
+
+    /* PROJECT GRID */
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+    }
+
+    .project {
+      min-height: 390px;
+
+      padding: 30px;
+
+      border: 1px solid rgba(255,255,255,0.09);
+      border-radius: 24px;
+
+      background:
+        linear-gradient(
+          145deg,
+          #13151a,
+          #0c0d10
+        );
+
+      display: flex;
+      flex-direction: column;
+
+      position: relative;
+      overflow: hidden;
+
+      transition:
+        transform 0.3s,
+        border-color 0.3s;
+    }
+
+    .project:hover {
+      transform: translateY(-6px);
+      border-color: rgba(255,255,255,0.25);
+    }
+
+    .project::after {
+      content: "";
+
+      position: absolute;
+
+      width: 300px;
+      height: 300px;
+
+      right: -130px;
+      bottom: -150px;
+
+      border-radius: 50%;
+
+      background: radial-gradient(
+        circle,
+        rgba(255,255,255,0.08),
+        transparent 70%
+      );
+    }
+
+    .project-top {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .project-number {
+      color: #555861;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .status {
+      color: #8c8f97;
+      font-size: 10px;
+    }
+
+    .status-dot {
+      display: inline-block;
+
+      width: 6px;
+      height: 6px;
+
+      margin-right: 6px;
+
+      background: white;
+      border-radius: 50%;
+    }
+
+    .building-dot {
+      opacity: 0.25;
+    }
+
+    .project-icon {
+      font-size: 35px;
+
+      margin-top: 45px;
+
+      color: #d5d6da;
+    }
+
+    .project h3 {
+      font-size: 30px;
+      letter-spacing: -1.5px;
+
+      margin-top: 15px;
+      margin-bottom: 8px;
+    }
+
+    .project-description {
+      color: #858891;
+
+      font-size: 13px;
+      line-height: 1.6;
+
+      max-width: 420px;
+    }
+
+    .tags {
+      display: flex;
+      gap: 7px;
+
+      margin-top: 22px;
+    }
+
+    .tag {
+      border: 1px solid rgba(255,255,255,0.09);
+
+      padding: 7px 10px;
+
+      border-radius: 999px;
+
+      color: #777a83;
+
+      font-size: 10px;
+    }
+
+    .project-link {
+      margin-top: auto;
+
+      padding-top: 25px;
+
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .coming-soon {
+      opacity: 0.55;
+    }
+
+    /* ABOUT */
+
+    .about {
+      padding: 50px 0 120px;
+
+      display: grid;
+      grid-template-columns: 1fr 300px;
+
+      gap: 15px;
+    }
+
+    .about-main {
+      padding: 55px;
+
+      border: 1px solid rgba(255,255,255,0.09);
+
+      border-radius: 24px;
+
+      background: #0e1014;
+    }
+
+    .about-main h2 {
+      font-size: clamp(40px, 5vw, 60px);
+
+      letter-spacing: -4px;
+
+      margin-top: 12px;
+    }
+
+    .about-main p {
+      max-width: 650px;
+
+      color: #8d9098;
+
+      font-size: 15px;
+      line-height: 1.8;
+
+      margin-top: 25px;
+    }
+
+    .about-link {
+      display: inline-block;
+
+      margin-top: 30px;
+
+      font-size: 13px;
+      font-weight: 600;
+
+      border-bottom: 1px solid #44474f;
+
+      padding-bottom: 5px;
+    }
+
+    .stats {
+      display: grid;
+      gap: 15px;
+    }
+
+    .stat {
+      background: #0e1014;
+
+      border: 1px solid rgba(255,255,255,0.09);
+
+      border-radius: 20px;
+
+      padding: 25px;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .stat strong {
+      font-size: 35px;
+      letter-spacing: -2px;
+    }
+
+    .stat span {
+      color: #62656d;
+      font-size: 11px;
+      margin-top: 4px;
+    }
+
+    /* FOOTER */
+
+    footer {
+      width: min(1180px, calc(100% - 48px));
+
+      margin: auto;
+
+      padding: 35px 0 45px;
+
+      border-top: 1px solid rgba(255,255,255,0.09);
+
+      display: flex;
+      justify-content: space-between;
+
+      color: #555861;
+
+      font-size: 11px;
+    }
+
+    /* MOBILE */
+
+    @media (max-width: 720px) {
+
+      .nav,
+      section,
+      footer,
+      .hero {
+        width: calc(100% - 32px);
+      }
+
+      .nav-links a:not(.github-button) {
+        display: none;
+      }
+
+      .hero h1 {
+        font-size: 65px;
+        letter-spacing: -4px;
+      }
+
+      .section-header {
+        display: block;
+      }
+
+      .section-description {
+        text-align: left;
+        margin-top: 18px;
+      }
+
+      .project-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .about {
+        grid-template-columns: 1fr;
+      }
+
+      .about-main {
+        padding: 32px;
+      }
+
+      .stats {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .stat {
+        padding: 18px 14px;
+      }
+
+      .stat strong {
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVIGATION -->
+
+  <header class="nav">
+
+    <a href="#" class="logo">
+      ER<span>.</span>
+    </a>
+
+    <nav class="nav-links">
+
+      <a href="#projects">
+        Projects
+      </a>
+
+      <a href="#about">
+        About
+      </a>
+
+      <a
+        href="https://github.com/emilramning"
+        target="_blank"
+        class="github-button"
+      >
+        GitHub ↗
+      </a>
+
+    </nav>
+
+  </header>
+
+
+  <!-- HERO -->
+
+  <main>
+
+    <div class="hero">
+
+      <div class="eyebrow">
+        <span class="online-dot"></span>
+        BUILDING ON THE INTERNET
+      </div>
+
+      <h1>
+        Hi, I'm Emil.<br>
+        <span>I build things.</span>
+      </h1>
+
+      <p class="hero-description">
+        A collection of websites, experiments and ideas I'm working on.
+        Some useful. Some weird. All mine.
+      </p>
+
+      <div class="hero-buttons">
+
+        <a
+          href="#projects"
+          class="button primary"
+        >
+          Explore projects ↓
+        </a>
+
+        <a
+          href="mailto:hello@emilramning.se"
+          class="button secondary"
+        >
+          Say hello
+        </a>
+
+      </div>
+
+      <div class="scroll">
+        SCROLL TO EXPLORE ↓
+      </div>
+
+    </div>
+
+
+    <!-- PROJECTS -->
+
+    <section
+      class="projects"
+      id="projects"
+    >
+
+      <div class="section-header">
+
+        <div>
+
+          <div class="eyebrow">
+            01 / PROJECTS
+          </div>
+
+          <h2>
+            Things I'm building.
+          </h2>
+
+        </div>
+
+        <p class="section-description">
+          Click a project to open it.<br>
+          More coming soon.
+        </p>
+
+      </div>
+
+
+      <div class="project-grid">
+
+
+        <!-- NEONTRADE -->
+
+        <a
+          class="project"
+          href="https://neontrade.emilramning.se"
+          target="_blank"
+        >
+
+          <div class="project-top">
+
+            <span class="project-number">
+              01
+            </span>
+
+            <span class="status">
+              <span class="status-dot"></span>
+              LIVE
+            </span>
+
+          </div>
+
+          <div class="project-icon">
+            ↗
+          </div>
+
+          <h3>
+            NeonTrade
+          </h3>
+
+          <p class="project-description">
+            A clean, modern project focused around
+            stocks, markets and investing.
+          </p>
+
+          <div class="tags">
+
+            <span class="tag">
+              Web
+            </span>
+
+            <span class="tag">
+              Finance
+            </span>
+
+            <span class="tag">
+              UI
+            </span>
+
+          </div>
+
+          <div class="project-link">
+            Visit project ↗
+          </div>
+
+        </a>
+
+
+        <!-- RICKROLL -->
+
+        <a
+          class="project"
+          href="https://rickroll.emilramning.se"
+          target="_blank"
+        >
+
+          <div class="project-top">
+
+            <span class="project-number">
+              02
+            </span>
+
+            <span class="status">
+              <span class="status-dot"></span>
+              LIVE
+            </span>
+
+          </div>
+
+          <div class="project-icon">
+            ▶
+          </div>
+
+          <h3>
+            Rickroll
+          </h3>
+
+          <p class="project-description">
+            A tiny website with one mission:
+            send someone a link and ruin their day.
+          </p>
+
+          <div class="tags">
+
+            <span class="tag">
+              Web
+            </span>
+
+            <span class="tag">
+              Meme
+            </span>
+
+          </div>
+
+          <div class="project-link">
+            Visit project ↗
+          </div>
+
+        </a>
+
+
+        <!-- WINDOWS SIMULATOR -->
+
+        <a
+          class="project"
+          href="https://windows.emilramning.se"
+          target="_blank"
+        >
+
+          <div class="project-top">
+
+            <span class="project-number">
+              03
+            </span>
+
+            <span class="status">
+              <span class="status-dot building-dot"></span>
+              BUILDING
+            </span>
+
+          </div>
+
+          <div class="project-icon">
+            ▣
+          </div>
+
+          <h3>
+            Windows Simulator
+          </h3>
+
+          <p class="project-description">
+            An interactive throwback to the classic
+            desktop computer experience.
+          </p>
+
+          <div class="tags">
+
+            <span class="tag">
+              JavaScript
+            </span>
+
+            <span class="tag">
+              Experiment
+            </span>
+
+          </div>
+
+          <div class="project-link">
+            View project ↗
+          </div>
+
+        </a>
+
+
+        <!-- FUTURE PROJECT -->
+
+        <div class="project coming-soon">
+
+          <div class="project-top">
+
+            <span class="project-number">
+              04
+            </span>
+
+            <span class="status">
+              <span class="status-dot building-dot"></span>
+              SOON
+            </span>
+
+          </div>
+
+          <div class="project-icon">
+            +
+          </div>
+
+          <h3>
+            Something new
+          </h3>
+
+          <p class="project-description">
+            There's always another idea in the queue.
+          </p>
+
+          <div class="tags">
+
+            <span class="tag">
+              ???
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ABOUT -->
+
+    <section
+      class="about"
+      id="about"
+    >
+
+      <div class="about-main">
+
+        <div class="eyebrow">
+          02 / ABOUT
+        </div>
+
+        <h2>
+          Curious by default.
+        </h2>
+
+        <p>
+          I'm Emil, a developer and builder from Sweden.
+          I like turning random ideas into real things —
+          from websites and little experiments to bigger projects.
+        </p>
+
+        <p>
+          This site is the home for everything I'm making.
+        </p>
+
+        <a
+          class="about-link"
+          href="https://github.com/emilramning"
+          target="_blank"
+        >
+          See my GitHub ↗
+        </a>
+
+      </div>
+
+
+      <div class="stats">
+
+        <div class="stat">
+          <strong>∞</strong>
+          <span>Ideas</span>
+        </div>
+
+        <div class="stat">
+          <strong>24/7</strong>
+          <span>Curiosity</span>
+        </div>
+
+        <div class="stat">
+          <strong>01</strong>
+          <span>Internet home</span>
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- FOOTER -->
+
+  <footer>
+
+    <span>
+      © 2026 Emil Ramning
+    </span>
+
+    <span>
+      emilramning.se
+    </span>
+
+  </footer>
+
+</body>
 </html>
