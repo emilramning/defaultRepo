@@ -1,6 +1,434 @@
-<html>
-  <body>
-    Hej jag heter Emil!
-    <a href=https://emilramning.github.io/neontrade/>Test</a>
-  </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Emil Ramning</title>
+    <meta name="description" content="Emil Ramning — projects, experiments and things built on the internet.">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-height: 100vh;
+            background: #070707;
+            color: #f5f5f5;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+                         Roboto, Helvetica, Arial, sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Background glow */
+        body::before {
+            content: "";
+            position: fixed;
+            width: 700px;
+            height: 700px;
+            top: -350px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: radial-gradient(
+                circle,
+                rgba(255,255,255,0.08) 0%,
+                rgba(255,255,255,0.025) 35%,
+                transparent 70%
+            );
+            pointer-events: none;
+        }
+
+        /* Navigation */
+        nav {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            max-width: 1100px;
+            margin: auto;
+            padding: 28px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #999;
+            font-size: 13px;
+        }
+
+        .dot {
+            width: 7px;
+            height: 7px;
+            background: #7cff9b;
+            border-radius: 50%;
+            box-shadow: 0 0 12px rgba(124,255,155,0.8);
+        }
+
+        /* Hero */
+        .hero {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 150px 25px 120px;
+            text-align: center;
+        }
+
+        .eyebrow {
+            color: #888;
+            font-size: 14px;
+            margin-bottom: 22px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            font-size: clamp(55px, 9vw, 105px);
+            line-height: 0.95;
+            letter-spacing: -6px;
+            font-weight: 800;
+            background: linear-gradient(
+                180deg,
+                #ffffff 0%,
+                #a9a9a9 100%
+            );
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            max-width: 600px;
+            margin: 30px auto 0;
+            color: #999;
+            font-size: 18px;
+            line-height: 1.7;
+        }
+
+        /* Project section */
+        .projects {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 25px 100px;
+        }
+
+        .section-label {
+            color: #666;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 18px;
+        }
+
+        .project-card {
+            position: relative;
+            display: block;
+            text-decoration: none;
+            color: inherit;
+
+            padding: 38px;
+            border: 1px solid #202020;
+            border-radius: 24px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(255,255,255,0.055),
+                    rgba(255,255,255,0.015)
+                );
+
+            overflow: hidden;
+
+            transition:
+                transform 0.3s ease,
+                border-color 0.3s ease,
+                background 0.3s ease;
+        }
+
+        .project-card::before {
+            content: "";
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            right: -120px;
+            top: -150px;
+
+            background: radial-gradient(
+                circle,
+                rgba(70, 140, 255, 0.15),
+                transparent 70%
+            );
+
+            transition: transform 0.4s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-6px);
+            border-color: #3a3a3a;
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(255,255,255,0.075),
+                    rgba(255,255,255,0.02)
+                );
+        }
+
+        .project-card:hover::before {
+            transform: scale(1.3);
+        }
+
+        .project-top {
+            position: relative;
+            z-index: 2;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .project-icon {
+            width: 54px;
+            height: 54px;
+            border-radius: 15px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 25px;
+
+            background: #111;
+            border: 1px solid #292929;
+        }
+
+        .arrow {
+            font-size: 24px;
+            color: #666;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .project-card:hover .arrow {
+            transform: translate(4px, -4px);
+            color: #fff;
+        }
+
+        .project-content {
+            position: relative;
+            z-index: 2;
+            margin-top: 55px;
+        }
+
+        .project-content h2 {
+            font-size: 32px;
+            letter-spacing: -1.5px;
+            margin-bottom: 10px;
+        }
+
+        .project-content p {
+            color: #888;
+            font-size: 15px;
+            line-height: 1.7;
+            max-width: 520px;
+        }
+
+        .tag {
+            display: inline-block;
+            margin-top: 22px;
+            padding: 7px 11px;
+
+            border-radius: 8px;
+            border: 1px solid #292929;
+
+            color: #999;
+            background: #101010;
+
+            font-size: 12px;
+        }
+
+        /* Footer */
+        footer {
+            max-width: 1000px;
+            margin: auto;
+            padding: 30px 25px 45px;
+
+            border-top: 1px solid #181818;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            color: #555;
+            font-size: 13px;
+        }
+
+        footer a {
+            color: #777;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        footer a:hover {
+            color: #fff;
+        }
+
+        /* Mobile */
+        @media (max-width: 600px) {
+
+            nav {
+                padding: 22px 20px;
+            }
+
+            .hero {
+                padding: 110px 20px 90px;
+            }
+
+            h1 {
+                letter-spacing: -4px;
+            }
+
+            .subtitle {
+                font-size: 16px;
+            }
+
+            .projects {
+                padding: 0 20px 80px;
+            }
+
+            .project-card {
+                padding: 27px;
+                border-radius: 20px;
+            }
+
+            .project-content {
+                margin-top: 40px;
+            }
+
+            .project-content h2 {
+                font-size: 27px;
+            }
+
+            footer {
+                margin: 0 20px;
+                padding-left: 0;
+                padding-right: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="logo">Emil Ramning</div>
+
+        <div class="status">
+            <span class="dot"></span>
+            Building
+        </div>
+    </nav>
+
+
+    <main>
+
+        <section class="hero">
+
+            <div class="eyebrow">
+                Welcome to my corner of the internet
+            </div>
+
+            <h1>
+                Emil Ramning
+            </h1>
+
+            <p class="subtitle">
+                I build things on the internet.
+                Explore my latest project below.
+            </p>
+
+        </section>
+
+
+        <section class="projects">
+
+            <div class="section-label">
+                Featured project
+            </div>
+
+            <a
+                class="project-card"
+                href="https://emilramning.github.io/neontrade/"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+
+                <div class="project-top">
+
+                    <div class="project-icon">
+                        📈
+                    </div>
+
+                    <div class="arrow">
+                        ↗
+                    </div>
+
+                </div>
+
+
+                <div class="project-content">
+
+                    <h2>
+                        NeonTrade
+                    </h2>
+
+                    <p>
+                        A modern stock market simulator where you can
+                        practice trading, explore the market and build
+                        your portfolio without risking real money.
+                    </p>
+
+                    <span class="tag">
+                        Stock Simulator
+                    </span>
+
+                </div>
+
+            </a>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+
+        <div>
+            © 2026 Emil Ramning
+        </div>
+
+        <div>
+            <a
+                href="https://github.com/emilramning"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                GitHub ↗
+            </a>
+        </div>
+
+    </footer>
+
+</body>
 </html>
